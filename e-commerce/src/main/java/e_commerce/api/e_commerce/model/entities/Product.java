@@ -33,18 +33,19 @@ public class Product {
     private String metaTitle;
     private String slug;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "product_tag",
+    @ManyToMany
+    @JoinTable(
+            name = "product_tags",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    Set<ProductTag> productTag = new HashSet<>();
+    private List<Tag> tags = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Image> images = new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Variant> variants; = new ArrayList<>();
+    private List<Variant> variants = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -54,25 +55,25 @@ public class Product {
     @JoinColumn(name = "brand_id")
     Brand brand;
 
-    public Product(Long id, String description, String productName, double basePrice, double salePercentage, boolean isOnSale, int moq, boolean isAvailable, String materialComposition, String badge, int reviewCount, double averageRating, boolean isFreeDelivery, int weight, LocalDate dateAdded, String metaTitle, String slug, Set<ProductTag> productTag, List<Image> images, List<Variant> variants, Category category, Brand brand) {
+    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean isOnSale, boolean isAvailable, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean isFreeDelivery, int weight, LocalDate dateAdded, String metaTitle, String slug, List<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
         this.id = id;
-        this.description = description;
         this.productName = productName;
+        this.description = description;
         this.basePrice = basePrice;
         this.salePercentage = salePercentage;
         this.isOnSale = isOnSale;
-        this.moq = moq;
         this.isAvailable = isAvailable;
+        this.moq = moq;
         this.materialComposition = materialComposition;
         this.badge = badge;
-        this.reviewCount = reviewCount;
         this.averageRating = averageRating;
+        this.reviewCount = reviewCount;
         this.isFreeDelivery = isFreeDelivery;
         this.weight = weight;
         this.dateAdded = dateAdded;
         this.metaTitle = metaTitle;
         this.slug = slug;
-        this.productTag = productTag;
+        this.tags = tags;
         this.images = images;
         this.variants = variants;
         this.category = category;
@@ -219,14 +220,6 @@ public class Product {
         this.slug = slug;
     }
 
-    public Set<ProductTag> getProductTag() {
-        return productTag;
-    }
-
-    public void setProductTag(Set<ProductTag> productTag) {
-        this.productTag = productTag;
-    }
-
     public List<Image> getImages() {
         return images;
     }
@@ -257,5 +250,13 @@ public class Product {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
