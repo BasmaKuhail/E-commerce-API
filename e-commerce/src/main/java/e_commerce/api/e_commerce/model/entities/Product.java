@@ -28,10 +28,13 @@ public class Product {
     private boolean isFreeDelivery;
     private int weight;
 
-    @Column
+    @Column(nullable = false, updatable = false)
     private LocalDate dateAdded;
     private String metaTitle;
     private String slug;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
