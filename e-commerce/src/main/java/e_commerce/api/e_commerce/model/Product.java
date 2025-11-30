@@ -1,21 +1,22 @@
-package e_commerce.api.e_commerce.model.entities;
+package e_commerce.api.e_commerce.model;
 
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String productName;
     private String description;
+
+    @Column(nullable = false)
     private double basePrice;
     private double salePercentage;
     private boolean isOnSale;
@@ -29,11 +30,15 @@ public class Product {
     private int weight;
 
     @Column(nullable = false, updatable = false)
-    private LocalDate dateAdded;
+    private LocalDate dateAdded = LocalDate.now();
     private String metaTitle;
     private String slug;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany
@@ -44,10 +49,18 @@ public class Product {
     )
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private List<Image> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private List<Variant> variants = new ArrayList<>();
 
     @ManyToOne
@@ -58,7 +71,7 @@ public class Product {
     @JoinColumn(name = "brand_id")
     Brand brand;
 
-    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean isOnSale, boolean isAvailable, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean isFreeDelivery, int weight, LocalDate dateAdded, String metaTitle, String slug, List<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
+    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean isOnSale, boolean isAvailable, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean isFreeDelivery, int weight, String metaTitle, String slug, List<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
         this.id = id;
         this.productName = productName;
         this.description = description;
@@ -73,7 +86,6 @@ public class Product {
         this.reviewCount = reviewCount;
         this.isFreeDelivery = isFreeDelivery;
         this.weight = weight;
-        this.dateAdded = dateAdded;
         this.metaTitle = metaTitle;
         this.slug = slug;
         this.tags = tags;
@@ -84,7 +96,6 @@ public class Product {
     }
 
     public Product() {
-
     }
 
     public Long getId() {
@@ -99,9 +110,7 @@ public class Product {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
+    public void setProductName(String productName) { this.productName = productName; }
 
     public String getDescription() {
         return description;
@@ -255,11 +264,7 @@ public class Product {
         this.brand = brand;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
+    public List<Tag> getTags() { return tags; }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
+    public void setTags(List<Tag> tags) { this.tags = tags; }
 }

@@ -1,28 +1,30 @@
-package e_commerce.api.e_commerce.model.entities;
+package e_commerce.api.e_commerce.model;
 
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Tag {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
     private String name;
+    private String description;
+    private String logoURL;
 
-    @ManyToMany(mappedBy = "tags")
-    private List<Product> products;
-    public Tag() {
+    private List<Product> products = new ArrayList<>();
+    public Brand() {
     }
 
-    public Tag(Long id, String name) {
+    public Brand(Long id, String name, String description, String logoURL) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.logoURL = logoURL;
     }
 
     public Long getId() {
@@ -39,6 +41,22 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
     }
 
     public List<Product> getProducts() {
