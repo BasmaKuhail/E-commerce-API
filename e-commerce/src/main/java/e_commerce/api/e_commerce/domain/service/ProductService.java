@@ -1,8 +1,12 @@
-package e_commerce.api.e_commerce.service;
+package e_commerce.api.e_commerce.domain.service;
 
-import e_commerce.api.e_commerce.model.Product;
-import e_commerce.api.e_commerce.repository.ProductRepository;
+import e_commerce.api.e_commerce.domain.model.Product;
+import e_commerce.api.e_commerce.domain.model.ProductFilter;
+import e_commerce.api.e_commerce.domain.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +17,9 @@ public class ProductService {
     @Autowired
     private  ProductRepository productRepository;
 
-    public List<Product> getAllProducts(){
-        return  productRepository.findAll();
+    // apply pagination to fetch a subset of products at a time
+    public Page<Product> getAllProducts(Pageable pageable){
+        return  productRepository.findAll(pageable);
     }
 
     public Optional<Product> findProductById(Long id){
@@ -34,8 +39,8 @@ public class ProductService {
             productRepository.save(product);
     }
 
-    public List<Product> findProductByCategoryAndBrandAndTag(String categoryName, String brandName, String tagName){
-        return productRepository.findByCategoryNameAndBrandNameAndTagsName(categoryName, brandName, tagName);
+    public List<Product> searchProducts(ProductFilter productFilter, Pageable pageable){
+        return productRepository.searchProducts(productFilter, pageable);
     }
 
 }

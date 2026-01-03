@@ -1,4 +1,4 @@
-package e_commerce.api.e_commerce.model;
+package e_commerce.api.e_commerce.domain.model;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Category {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,25 +16,15 @@ public class Category {
     private String description;
     private String logoURL;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
-
-    public Category() {
+    public Brand() {
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public Category(Long id, String description, String name, String logoURL) {
+    public Brand(Long id, String name, String description, String logoURL) {
         this.id = id;
-        this.description = description;
         this.name = name;
-        logoURL = logoURL;
+        this.description = description;
+        this.logoURL = logoURL;
     }
 
     public Long getId() {
@@ -66,6 +56,14 @@ public class Category {
     }
 
     public void setLogoURL(String logoURL) {
-        logoURL = logoURL;
+        this.logoURL = logoURL;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
