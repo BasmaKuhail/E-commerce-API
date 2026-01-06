@@ -1,6 +1,6 @@
-package e_commerce.api.e_commerce.domain.repository;
+package e_commerce.api.e_commerce.repository;
 
-import e_commerce.api.e_commerce.domain.model.Category;
+import e_commerce.api.e_commerce.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

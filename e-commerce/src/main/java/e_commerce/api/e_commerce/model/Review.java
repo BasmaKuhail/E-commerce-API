@@ -1,4 +1,4 @@
-package e_commerce.api.e_commerce.domain.model;
+package e_commerce.api.e_commerce.model;
 
 import jakarta.persistence.*;
 

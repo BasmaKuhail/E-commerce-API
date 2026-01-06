@@ -1,11 +1,10 @@
-package e_commerce.api.e_commerce.domain.service;
+package e_commerce.api.e_commerce.service;
 
-import e_commerce.api.e_commerce.domain.model.Product;
-import e_commerce.api.e_commerce.domain.model.ProductFilter;
-import e_commerce.api.e_commerce.domain.repository.ProductRepository;
+import e_commerce.api.e_commerce.model.Product;
+import e_commerce.api.e_commerce.model.ProductFilter;
+import e_commerce.api.e_commerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +38,8 @@ public class ProductService {
             productRepository.save(product);
     }
 
-    public List<Product> searchProducts(ProductFilter productFilter, Pageable pageable){
-        return productRepository.searchProducts(productFilter, pageable);
-    }
+//    public List<Product> searchProducts(ProductFilter productFilter, Pageable pageable){
+//        return productRepository.searchProducts(productFilter, pageable);
+//    }
 
 }
