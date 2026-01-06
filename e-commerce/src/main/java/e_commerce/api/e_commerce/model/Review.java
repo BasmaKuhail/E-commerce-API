@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "review")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "review_id")
     private Long id;
     private int rating;
     @Column(nullable = false)
