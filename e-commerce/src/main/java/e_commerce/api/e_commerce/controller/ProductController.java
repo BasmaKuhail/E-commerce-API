@@ -59,4 +59,9 @@ public class ProductController {
         productService.removeProductById(productId);
         return ResponseEntity.accepted().build();
     }
+
+//    @PostMapping("/addProduct")
+//    public ResponseEntity<Product> addProduct(@RequestBody Product product){
+//        return new ResponseEntity<>(productService.createProduct(product).);
+//    }
 }
