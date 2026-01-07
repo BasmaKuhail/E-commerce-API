@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "review")
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long id;
     private int rating;

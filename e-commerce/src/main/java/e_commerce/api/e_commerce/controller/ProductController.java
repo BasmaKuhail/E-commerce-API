@@ -33,7 +33,7 @@ public class ProductController {
                         p.getId(),
                         p.getProductName(),
                         p.getBasePrice(),
-                        p.isAvailable(),
+                        p.getAvailable(),
                         p.getSlug()
                 ));
     }
@@ -46,7 +46,7 @@ public class ProductController {
                         p.getId(),
                         p.getProductName(),
                         p.getBasePrice(),
-                        p.isAvailable(),
+                        p.getAvailable(),
                         p.getSlug()
                 ))
                 .map(ResponseEntity::ok)
@@ -60,8 +60,8 @@ public class ProductController {
         return ResponseEntity.accepted().build();
     }
 
-//    @PostMapping("/addProduct")
-//    public ResponseEntity<Product> addProduct(@RequestBody Product product){
-//        return new ResponseEntity<>(productService.createProduct(product).);
-//    }
+    @PostMapping("/addProduct")
+    public Product addProduct(@RequestBody Product product){
+        return productService.createProduct(product);
+    }
 }

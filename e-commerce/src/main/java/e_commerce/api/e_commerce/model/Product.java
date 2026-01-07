@@ -1,6 +1,5 @@
 package e_commerce.api.e_commerce.model;
 
-import e_commerce.api.e_commerce.model.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ import java.util.List;
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -20,14 +19,20 @@ public class Product {
     @Column(nullable = false)
     private double basePrice;
     private double salePercentage;
-    private boolean isOnSale;
-    private boolean isAvailable;
+
+    @Column(name = "is_on_sale")
+    private boolean onSale;
+
+    @Column(name = "is_available")
+    private boolean available;
     private int moq;
     private String materialComposition;
     private String badge;
     private double averageRating;
     private int reviewCount;
-    private boolean isFreeDelivery;
+
+    @Column(name = "is_free_delivery")
+    private boolean freeDelivery;
     private int weight;
 
     @Column(nullable = false, updatable = false)
@@ -72,20 +77,20 @@ public class Product {
     @JoinColumn(name = "brand_id")
     Brand brand;
 
-    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean isOnSale, boolean isAvailable, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean isFreeDelivery, int weight, String metaTitle, String slug, List<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
+    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean onSale, boolean available, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean freeDelivery, int weight, String metaTitle, String slug, List<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
         this.id = id;
         this.productName = productName;
         this.description = description;
         this.basePrice = basePrice;
         this.salePercentage = salePercentage;
-        this.isOnSale = isOnSale;
-        this.isAvailable = isAvailable;
+        this.onSale = onSale;
+        this.available = available;
         this.moq = moq;
         this.materialComposition = materialComposition;
         this.badge = badge;
         this.averageRating = averageRating;
         this.reviewCount = reviewCount;
-        this.isFreeDelivery = isFreeDelivery;
+        this.freeDelivery = freeDelivery;
         this.weight = weight;
         this.metaTitle = metaTitle;
         this.slug = slug;
@@ -137,20 +142,20 @@ public class Product {
         this.salePercentage = salePercentage;
     }
 
-    public boolean isOnSale() {
-        return isOnSale;
+    public boolean getOnSale() {
+        return onSale;
     }
 
     public void setOnSale(boolean onSale) {
-        isOnSale = onSale;
+        this.onSale = onSale;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public boolean getAvailable() {
+        return available;
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 
     public String getMaterialComposition() {
@@ -193,12 +198,12 @@ public class Product {
         this.reviewCount = reviewCount;
     }
 
-    public boolean isFreeDelivery() {
-        return isFreeDelivery;
+    public boolean getFreeDelivery() {
+        return freeDelivery;
     }
 
     public void setFreeDelivery(boolean freeDelivery) {
-        isFreeDelivery = freeDelivery;
+        this.freeDelivery = freeDelivery;
     }
 
     public int getWeight() {
