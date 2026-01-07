@@ -1,11 +1,13 @@
-package e_commerce.api.e_commerce.domain.model;
+package e_commerce.api.e_commerce.model;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "variant")
 public class Variant {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "variant_id")
     private Long id;
 
     private String size;
@@ -15,8 +17,7 @@ public class Variant {
     private boolean isAvailable;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @JoinColumn(name = "product_id", nullable = false) private Product product;
 
     public Variant() {
     }

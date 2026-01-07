@@ -1,12 +1,16 @@
-package e_commerce.api.e_commerce.domain.model;
+package e_commerce.api.e_commerce.model;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "image")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "image_id")
     private Long id;
+
+    @Column(name = "image_url")
     private String imageURL;
 
     @Column(nullable = false)

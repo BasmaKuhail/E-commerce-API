@@ -1,13 +1,15 @@
-package e_commerce.api.e_commerce.domain.model;
+package e_commerce.api.e_commerce.model;
 
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "tag")
 public class Tag {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tag_id")
     private Long id;
 
     @Column(nullable = false)
