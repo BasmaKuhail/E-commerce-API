@@ -1,5 +1,6 @@
 package e_commerce.api.e_commerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Brand {
     private String logoURL;
 
     @OneToMany
+    @JsonIgnore// to avoid infinite recursion
     private List<Product> products = new ArrayList<>();
     public Brand() {
     }

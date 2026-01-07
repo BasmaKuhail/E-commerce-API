@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "tag")
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tag_id")
     private Long id;
 
     @Column(nullable = false)

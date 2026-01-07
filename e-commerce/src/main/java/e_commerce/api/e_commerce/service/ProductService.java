@@ -1,7 +1,9 @@
 package e_commerce.api.e_commerce.service;
 
+import e_commerce.api.e_commerce.model.Brand;
 import e_commerce.api.e_commerce.model.Product;
 import e_commerce.api.e_commerce.model.ProductFilter;
+import e_commerce.api.e_commerce.repository.BrandRepository;
 import e_commerce.api.e_commerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,9 +35,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void updateProduct(Product product){
+    public Product updateProduct(Product product){
+        System.out.println(product.getId());
         if(productRepository.existsById(product.getId()))
-            productRepository.save(product);
+            return productRepository.save(product);
+        return null;
     }
 
 //    public List<Product> searchProducts(ProductFilter productFilter, Pageable pageable){
