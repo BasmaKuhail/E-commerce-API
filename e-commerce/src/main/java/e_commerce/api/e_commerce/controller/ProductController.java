@@ -15,40 +15,19 @@ import java.util.Optional;
 
 @RestController
 public class ProductController {
-    public record ProductDto(
-            Long id,
-            String productName,
-            double basePrice,
-            boolean isAvailable,
-            String slug
-    ) {}
-
+    
     @Autowired
     ProductService productService;
 
     @GetMapping("/products")
-    public Page<ProductDto> getProducts(@PageableDefault(page = 0, size = 10) Pageable pageable){
-        return productService.getAllProducts(pageable)
-                .map(p -> new ProductDto(
-                        p.getId(),
-                        p.getProductName(),
-                        p.getBasePrice(),
-                        p.getAvailable(),
-                        p.getSlug()
-                ));
+    public Page<Product> getProducts(@PageableDefault(page = 0, size = 10) Pageable pageable){
+        return productService.getAllProducts(pageable);
     }
 
     @GetMapping( "/product/{productId}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId){
+    public ResponseEntity<Product> getProductById(@PathVariable Long productId){
         System.out.println(productId);
         return productService.findProductById(productId)
-                .map(p -> new ProductDto(
-                        p.getId(),
-                        p.getProductName(),
-                        p.getBasePrice(),
-                        p.getAvailable(),
-                        p.getSlug()
-                ))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
