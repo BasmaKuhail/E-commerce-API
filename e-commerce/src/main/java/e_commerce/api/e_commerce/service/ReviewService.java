@@ -18,4 +18,18 @@ public class ReviewService {
     public Review getReviewById (Long id){
         return reviewRepository.getReferenceById(id);
     }
+
+    public void removeReview (Long id){
+        reviewRepository.deleteById(id);
+    }
+
+    public Review addReview (Review review){
+        return reviewRepository.save(review);
+    }
+
+    public Review updateReview(Review review){
+        if(reviewRepository.existsById(review.getId()))
+            return reviewRepository.save(review);
+        return null;
+    }
 }

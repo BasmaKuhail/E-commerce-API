@@ -2,6 +2,7 @@ package e_commerce.api.e_commerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -16,7 +17,8 @@ public class Review {
     @Column(nullable = false)
     private String reviewText;
 
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
+    @CreationTimestamp
     private LocalDate dateCreated = LocalDate.now();
 
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -84,6 +86,7 @@ public class Review {
     }
 
     public void setProduct(Product product) {
+
         this.product = product;
     }
 }
