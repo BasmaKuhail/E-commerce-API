@@ -1,6 +1,7 @@
 package e_commerce.api.e_commerce.service;
 
 import e_commerce.api.e_commerce.model.Category;
+import e_commerce.api.e_commerce.model.Product;
 import e_commerce.api.e_commerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,5 +34,9 @@ public class CategoryService {
         if(categoryRepository.existsById(category.getId()))
             return categoryRepository.save(category);
         return null;
+    }
+
+    public Page<Product> findProductsByCategoryId(Long cId, Pageable pageable){
+        return categoryRepository.findProductsById(cId, pageable);
     }
 }

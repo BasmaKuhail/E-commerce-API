@@ -1,6 +1,7 @@
 package e_commerce.api.e_commerce.controller;
 
 import e_commerce.api.e_commerce.model.Product;
+import e_commerce.api.e_commerce.model.Review;
 import e_commerce.api.e_commerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api")
 public class ProductController {
 
     @Autowired
@@ -48,4 +51,10 @@ public class ProductController {
     public Product updateProduct(@RequestBody Product product){
         return productService.updateProduct(product);
     }
+
+    @GetMapping("/reviews/{productId}")
+    public List<Review> getReviewsForProduct(@PathVariable Long productId){
+        return productService.findReviewsForProduct(productId);
+    }
+
 }

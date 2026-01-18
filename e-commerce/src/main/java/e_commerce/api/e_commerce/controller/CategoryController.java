@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+//@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
@@ -32,7 +34,6 @@ public class CategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
     @PostMapping("/addCategory")
     public Category createCategory(@RequestBody Category category){
         return categoryService.createCategory(category);
@@ -48,4 +49,10 @@ public class CategoryController {
     public Category updateCategory(@RequestBody Category category){
         return categoryService.updateCategory(category);
     }
+
+//    @GetMapping("/productsByCategory/{cId}")
+//    public Page<Product> getProductsByCategoryId(@PathVariable Long cId, Pageable pageable){
+//        return categoryService.findProductsByCategoryId(cId, pageable);
+//    }
+
 }
