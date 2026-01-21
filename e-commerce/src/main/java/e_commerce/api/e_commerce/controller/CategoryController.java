@@ -50,9 +50,9 @@ public class CategoryController {
         return categoryService.updateCategory(category);
     }
 
-//    @GetMapping("/productsByCategory/{cId}")
-//    public Page<Product> getProductsByCategoryId(@PathVariable Long cId, Pageable pageable){
-//        return categoryService.findProductsByCategoryId(cId, pageable);
-//    }
+    @GetMapping("/productsByCategory/{cId}")
+    public Page<Product> getProductsByCategoryId(Pageable pageable, @PathVariable Long cId){
+        return categoryService.findProductsByCategoryId(cId, pageable);
+    }
 
 }
