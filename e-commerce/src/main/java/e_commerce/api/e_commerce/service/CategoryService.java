@@ -3,7 +3,10 @@ package e_commerce.api.e_commerce.service;
 import e_commerce.api.e_commerce.model.Category;
 import e_commerce.api.e_commerce.model.Product;
 import e_commerce.api.e_commerce.repository.CategoryRepository;
+import e_commerce.api.e_commerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
     public Page<Category> getAllCategories(Pageable pageable){
         return categoryRepository.findAll(pageable);
     }
@@ -37,6 +42,7 @@ public class CategoryService {
     }
 
     public Page<Product> findProductsByCategoryId(Long cId, Pageable pageable){
-        return categoryRepository.findProductsById(cId, pageable);
+        Category category = categoryRepository.findCategoryById(cId);
+        return productRepository.findProductByCategory(pageable, category);
     }
 }
