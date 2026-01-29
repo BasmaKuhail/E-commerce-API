@@ -16,4 +16,7 @@ public class ImageService {
     public Image addImage(Image image){
         return imageRepository.save(image);
     }
+//    public Image getImageByImageURL(String iURL){
+//        return imageRepository.findImageByImageURL(iURL);
+//    }
 }
