@@ -60,4 +60,9 @@ public class ImageController {
         byte[] data = Files.readAllBytes(path);
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(data);
     }
+
+//    @GetMapping("/image/{iURL}")
+//    public Image getImageByImageURL(@PathVariable String iURL){
+//        return imageService.getImageByImageURL(iURL);
+//    }
 }
