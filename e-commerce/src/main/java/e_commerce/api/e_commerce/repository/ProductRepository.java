@@ -3,6 +3,7 @@ package e_commerce.api.e_commerce.repository;
 import e_commerce.api.e_commerce.model.Category;
 import e_commerce.api.e_commerce.model.Product;
 import e_commerce.api.e_commerce.model.ProductFilter;
+import e_commerce.api.e_commerce.model.Tag;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
@@ -16,5 +17,10 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 //    public List<Product> searchProducts(ProductFilter productFilter, Pageable pageable);
 
+
     public Page findProductByCategory (Pageable pageable, Category category);
+
+//    public Page findProductByTags(Pageable pageable, Tag tag);
+
+    public Product findProductById(Long pId);
 }

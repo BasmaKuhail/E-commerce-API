@@ -1,24 +1,23 @@
 package e_commerce.api.e_commerce.service;
 
-import e_commerce.api.e_commerce.model.Brand;
-import e_commerce.api.e_commerce.model.Product;
-import e_commerce.api.e_commerce.model.ProductFilter;
-import e_commerce.api.e_commerce.model.Review;
+import e_commerce.api.e_commerce.model.*;
 import e_commerce.api.e_commerce.repository.BrandRepository;
 import e_commerce.api.e_commerce.repository.ProductRepository;
+import e_commerce.api.e_commerce.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
     @Autowired
     private  ProductRepository productRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     // apply pagination to fetch a subset of products at a time
     public Page<Product> getAllProducts(Pageable pageable){
@@ -58,6 +57,15 @@ public class ProductService {
     public List<Review> findReviewsForProduct (Long productId){
         Optional<Product> p = productRepository.findById(productId);
         return findReviewsForProduct(p.get().getReviews(), productId);
+    }
+
+    public Product assignTagsToProduct(Long pId, List<Long> tIds){
+        Product p = productRepository.findProductById(pId);
+
+        Set<Tag> tags = new HashSet<>(tagRepository.findAllById(tIds));
+
+        p.setTags(tags);
+        return p;
     }
 //    public List<Product> searchProducts(ProductFilter productFilter, Pageable pageable){
 //        return productRepository.searchProducts(productFilter, pageable);
