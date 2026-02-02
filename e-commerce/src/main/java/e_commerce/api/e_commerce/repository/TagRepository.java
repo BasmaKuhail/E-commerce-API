@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Long> {
+    public Tag findTagById(Long tId);
+
+    public Tag findTagByName(String tName);
 }

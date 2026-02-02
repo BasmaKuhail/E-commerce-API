@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -55,7 +57,7 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private List<Tag> tags = new ArrayList<>();
+    private Set<Tag> tags = new HashSet<>();
 
     @OneToMany(
             mappedBy = "product",
@@ -79,7 +81,7 @@ public class Product {
     @JoinColumn(name = "brand_id")
     Brand brand;
 
-    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean onSale, boolean available, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean freeDelivery, int weight, String metaTitle, String slug, List<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
+    public Product(Long id, String productName, String description, double basePrice, double salePercentage, boolean onSale, boolean available, int moq, String materialComposition, String badge, double averageRating, int reviewCount, boolean freeDelivery, int weight, String metaTitle, String slug, Set<Tag> tags, List<Image> images, List<Variant> variants, Category category, Brand brand) {
         this.id = id;
         this.productName = productName;
         this.description = description;
@@ -272,9 +274,9 @@ public class Product {
         this.brand = brand;
     }
 
-    public List<Tag> getTags() { return tags; }
+    public Set<Tag> getTags() { return tags; }
 
-    public void setTags(List<Tag> tags) { this.tags = tags; }
+    public void setTags(Set<Tag> tags) { this.tags = tags; }
 
     public List<Review> getReviews() {
         return reviews;
