@@ -1,7 +1,6 @@
 package e_commerce.api.e_commerce.service;
 
 import e_commerce.api.e_commerce.model.*;
-import e_commerce.api.e_commerce.repository.BrandRepository;
 import e_commerce.api.e_commerce.repository.ProductRepository;
 import e_commerce.api.e_commerce.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
